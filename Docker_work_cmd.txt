@@ -1,0 +1,306 @@
+Here's a **Docker Cheat Sheet** to help you with common commands and operations. It covers basic commands for building, running, managing containers, and images.
+
+### **Docker Basics:**
+
+#### **1. Docker Version and Info:**
+
+* **Check Docker version:**
+
+  ```bash
+  docker --version
+  ```
+* **Get Docker system info:**
+
+  ```bash
+  docker info
+  ```
+
+#### **2. Docker Images:**
+
+* **List images:**
+
+  ```bash
+  docker images
+  ```
+
+* **Pull an image from Docker Hub:**
+
+  ```bash
+  docker pull <image-name>
+  ```
+
+  Example: `docker pull ubuntu:latest`
+
+* **Build an image from a Dockerfile:**
+
+  ```bash
+  docker build -t <image-name> <path-to-dockerfile>
+  ```
+
+  Example: `docker build -t my-image .`
+
+* **Remove an image:**
+
+  ```bash
+  docker rmi <image-id>
+  ```
+
+  You can use the image ID or name.
+
+#### **3. Docker Containers:**
+
+* **List running containers:**
+
+  ```bash
+  docker ps
+  ```
+
+* **List all containers (including stopped):**
+
+  ```bash
+  docker ps -a
+  ```
+
+* **Run a new container:**
+
+  ```bash
+  docker run -d --name <container-name> <image-name>
+  ```
+
+  Example: `docker run -d --name my-container ubuntu`
+
+* **Run a container with a specific port mapping:**
+
+  ```bash
+  docker run -d -p <host-port>:<container-port> <image-name>
+  ```
+
+  Example: `docker run -d -p 8080:80 nginx`
+
+* **Run a container interactively (with terminal access):**
+
+  ```bash
+  docker run -it <image-name> /bin/bash
+  ```
+
+  Example: `docker run -it ubuntu /bin/bash`
+
+* **Stop a running container:**
+
+  ```bash
+  docker stop <container-id-or-name>
+  ```
+
+* **Start a stopped container:**
+
+  ```bash
+  docker start <container-id-or-name>
+  ```
+
+* **Remove a container:**
+
+  ```bash
+  docker rm <container-id-or-name>
+  ```
+
+* **Restart a container:**
+
+  ```bash
+  docker restart <container-id-or-name>
+  ```
+
+* **View container logs:**
+
+  ```bash
+  docker logs <container-id-or-name>
+  ```
+
+* **Attach to a running container (useful for debugging):**
+
+  ```bash
+  docker attach <container-id-or-name>
+  ```
+
+#### **4. Docker Networks:**
+
+* **List networks:**
+
+  ```bash
+  docker network ls
+  ```
+
+* **Create a new network:**
+
+  ```bash
+  docker network create <network-name>
+  ```
+
+* **Connect a container to a network:**
+
+  ```bash
+  docker network connect <network-name> <container-id-or-name>
+  ```
+
+* **Disconnect a container from a network:**
+
+  ```bash
+  docker network disconnect <network-name> <container-id-or-name>
+  ```
+
+#### **5. Docker Volumes (Data Persistence):**
+
+* **List volumes:**
+
+  ```bash
+  docker volume ls
+  ```
+
+* **Create a new volume:**
+
+  ```bash
+  docker volume create <volume-name>
+  ```
+
+* **Mount a volume to a container:**
+
+  ```bash
+  docker run -d -v <volume-name>:<container-path> <image-name>
+  ```
+
+* **Inspect a volume:**
+
+  ```bash
+  docker volume inspect <volume-name>
+  ```
+
+* **Remove a volume:**
+
+  ```bash
+  docker volume rm <volume-name>
+  ```
+
+#### **6. Docker Compose (for Multi-Container Apps):**
+
+Docker Compose is used for defining and running multi-container Docker applications.
+
+* **Install Docker Compose:**
+  Follow the official guide from [Docker Compose installation](https://docs.docker.com/compose/install/) to install it.
+
+* **Start all containers defined in a `docker-compose.yml`:**
+
+  ```bash
+  docker-compose up
+  ```
+
+* **Run containers in the background (detached mode):**
+
+  ```bash
+  docker-compose up -d
+  ```
+
+* **Stop all containers defined in a `docker-compose.yml`:**
+
+  ```bash
+  docker-compose down
+  ```
+
+* **View logs of all containers:**
+
+  ```bash
+  docker-compose logs
+  ```
+
+* **Build and start containers defined in a `docker-compose.yml`:**
+
+  ```bash
+  docker-compose up --build
+  ```
+
+#### **7. Dockerfile Basics:**
+
+A **Dockerfile** is a script that contains instructions on how to build a Docker image.
+
+* **Example Dockerfile:**
+
+  ```Dockerfile
+  # Use a base image
+  FROM ubuntu:latest
+
+  # Install dependencies
+  RUN apt-get update && apt-get install -y python3 python3-pip
+
+  # Set the working directory
+  WORKDIR /app
+
+  # Copy files into the container
+  COPY . /app
+
+  # Expose port
+  EXPOSE 5000
+
+  # Run a command
+  CMD ["python3", "app.py"]
+  ```
+
+* **Build an image from a Dockerfile:**
+
+  ```bash
+  docker build -t <image-name> .
+  ```
+
+#### **8. Docker Compose Example (Multi-Container App):**
+
+Here is a basic example of a `docker-compose.yml` file for a multi-container app with a web server and a database:
+
+```yaml
+version: '3'
+services:
+  web:
+    image: nginx
+    ports:
+      - "80:80"
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: example
+```
+
+* **Start the containers:**
+
+  ```bash
+  docker-compose up
+  ```
+
+* **Stop the containers:**
+
+  ```bash
+  docker-compose down
+  ```
+
+#### **9. Docker Container Networking:**
+
+Docker containers can communicate with each other using networks.
+
+* **Create a custom network:**
+
+  ```bash
+  docker network create my-network
+  ```
+
+* **Run containers on a custom network:**
+
+  ```bash
+  docker run --network my-network --name container1 <image-name>
+  docker run --network my-network --name container2 <image-name>
+  ```
+
+* **Inspect network:**
+
+  ```bash
+  docker network inspect my-network
+  ```
+
+---
+
+This cheat sheet should give you the essential commands to start using Docker efficiently. If you need more advanced topics like Docker Swarm, Kubernetes, or debugging tips, feel free to ask!
+

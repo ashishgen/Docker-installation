@@ -1,0 +1,171 @@
+Steps to Install Docker via docker.io
+
+Update the package index:
+
+sudo apt-get update
+
+
+Install Docker:
+Install the docker.io package from the default Ubuntu/Debian repositories.
+
+sudo apt-get install docker.io
+
+
+Start and enable Docker service:
+After installation, you need to start Docker and enable it to automatically start on boot.
+
+sudo systemctl start docker
+sudo systemctl enable docker
+
+
+Verify Docker Installation:
+Check the Docker version to verify the installation.
+
+docker --version
+
+
+Test Docker (Optional):
+Run the hello-world container to test if Docker is working properly.
+
+sudo docker run hello-world
+
+Managing Docker without sudo (Optional)
+
+By default, Docker requires sudo to run commands. If you want to avoid using sudo every time, you can add your user to the docker group:
+
+Add your user to the docker group:
+
+sudo usermod -aG docker $USER
+
+
+Log out and log back in (or restart your system).
+
+After this, you should be able to run Docker commands without sudo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+To install Docker on your machine, the steps vary depending on your operating system. Here's a basic guide for each:
+
+For Linux (Ubuntu/Debian)
+
+Update your system:
+
+
+
+sudo apt-get update
+
+
+Install required packages:
+
+sudo apt-get install \
+apt-transport-https \
+ca-certificates \
+curl \
+software-properties-common
+
+
+Add Docker's official GPG key:
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+
+Set up the stable repository:
+
+sudo add-apt-repository \
+"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) \
+stable"
+
+
+Update the apt package index:
+
+sudo apt-get update
+
+
+Install Docker CE (Community Edition):
+
+sudo apt-get install docker-ce
+
+
+Verify installation:
+
+sudo docker --version
+
+
+Start and enable Docker to run on boot:
+
+sudo systemctl start docker
+sudo systemctl enable docker
+
+
+Test Docker:
+
+sudo docker run hello-world
+
+For Windows
+
+Download Docker Desktop for Windows:
+
+Visit Docker's official website
+
+and download the installer.
+
+Run the installer:
+
+Follow the installation steps. It may require a system restart.
+
+Enable WSL 2 (Windows Subsystem for Linux):
+
+If not already installed, Docker Desktop will prompt you to install WSL 2 during setup.
+
+You can enable WSL 2 manually by running the following commands:
+
+wsl --install
+
+
+Launch Docker Desktop:
+
+After installation, you should be able to run Docker from the start menu.
+
+Verify installation:
+
+Open PowerShell or Command Prompt and check Docker's version:
+
+docker --version
+
+For macOS
+
+Download Docker Desktop for Mac:
+
+Go to Docker's official website
+
+and download the Docker Desktop installer for Mac.
+
+Run the installer:
+
+Drag the Docker icon to your Applications folder as instructed in the setup process.
+
+Start Docker Desktop:
+
+Open the Docker Desktop application from the Applications folder.
+
+Verify installation:
+
+Open Terminal and check Docker’s version:
+
+docker --version
+
+
+Test Docker:
+
+docker run hello-world
